@@ -126,10 +126,6 @@ Start-DscConfiguration -Path .\DHCPServerVM -Wait -Force -Verbose
 CorpDCVM               -ConfigurationData $configData -Role "HyperVHost"   -OutputPath . 
 Start-DscConfiguration -Path .\CorpDCVM -Wait -Force -Verbose
 
-# Corporate Domain Controller configuration is completed but it is still busy updating DNS service.
-# Adding sleep so that Domain Controller will be ready to add client to the domain.
-Start-Sleep -Seconds 30
-
 # Configure Corporate Client
 CorpClientVM           -ConfigurationData $configData -Role "HyperVHost"   -OutputPath . 
 Start-DscConfiguration -Path .\CorpClientVM -Wait -Force -Verbose
@@ -143,9 +139,6 @@ if($PauseBetweenStages.IsPresent) {
 # Configure SafeHarbor Domain Controller using xADDomain resource.
 SHDCVM                 -ConfigurationData $configData -Role "HyperVHost"   -OutputPath . 
 Start-DscConfiguration -Path .\SHDCVM -Wait -Force -Verbose
-
-# Adding sleep so that Domain Controller will be ready to add client to the domain.
-Start-Sleep -Seconds 100
 
 # Pause script
 if($PauseBetweenStages.IsPresent) {

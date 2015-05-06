@@ -328,6 +328,10 @@ $xPSDesiredStateConfigurationModulePath = Get-DscResourceModulePath -DscResource
                         Destination = "Scripts\ImportCerts.ps1"
                     } 
                     @{
+                        Source = "$ConfigDataLocation\VMData\metaconfig.mof"; 
+                        Destination = "Windows\System32\Configuration\metaconfig.mof"
+                    }
+                    @{
                         Source = "$ConfigDataLocation\VMData\DHCPServer\*.mof";
                         Destination = "Windows\System32\Configuration\Pending.mof"
                     }
@@ -359,11 +363,17 @@ $xPSDesiredStateConfigurationModulePath = Get-DscResourceModulePath -DscResource
                 MachineName        = "CorpDC"                        
                 MemorySizeofVM     = 2048MB;
                 MACAddress         = "00155D8A54A0" 
+                RetryCount         = 90
+                RetryIntervalSec   = 10
                 AdminUserCredFile  = "$ConfigDataLocation\VMData\CORPDomainCred.clixml"
                 FilesToCopy = @(
                     @{
                         Source = "$ConfigDataLocation\VMData\unattend.xml";
                         Destination = "unattend.xml"
+                    }
+                    @{ 
+                        Source = "$ConfigDataLocation\VMData\metaconfig.mof"; 
+                        Destination = "Windows\System32\Configuration\metaconfig.mof"
                     }
                     @{
                         Source = "$ConfigDataLocation\VMData\CorpDC\*.mof";
@@ -419,6 +429,10 @@ $xPSDesiredStateConfigurationModulePath = Get-DscResourceModulePath -DscResource
                         Destination = "unattend.xml"
                     }
                     @{
+                        Source = "$ConfigDataLocation\VMData\metaconfig.mof"; 
+                        Destination = "Windows\System32\Configuration\metaconfig.mof"
+                    }
+                    @{
                         Source = "$ConfigDataLocation\VMData\CorpClient\*.mof";
                         Destination = "Windows\System32\Configuration\Pending.mof"
                     }
@@ -458,6 +472,10 @@ $xPSDesiredStateConfigurationModulePath = Get-DscResourceModulePath -DscResource
                     @{
                         Source = "$ConfigDataLocation\VMData\unattend.xml";
                         Destination = "unattend.xml"
+                    }
+                    @{ 
+                        Source = "$ConfigDataLocation\VMData\metaconfig.mof"; 
+                        Destination = "Windows\System32\Configuration\metaconfig.mof"
                     }
                     @{
                         Source = "$ConfigDataLocation\VMData\SHDC\*.mof";
@@ -516,6 +534,10 @@ $xPSDesiredStateConfigurationModulePath = Get-DscResourceModulePath -DscResource
                         Destination = "unattend.xml"
                     }
                     @{
+                        Source = "$ConfigDataLocation\VMData\metaconfig.mof"; 
+                        Destination = "Windows\System32\Configuration\metaconfig.mof"
+                    }
+                    @{
                         Source = "$ConfigDataLocation\VMData\SHPullServer\*.mof";
                         Destination = "Windows\System32\Configuration\Pending.mof"
                     }
@@ -569,6 +591,10 @@ $xPSDesiredStateConfigurationModulePath = Get-DscResourceModulePath -DscResource
                     @{
                         Source = "$ConfigDataLocation\VMData\unattend.xml";
                         Destination = "unattend.xml"
+                    }
+                    @{ 
+                        Source = "$ConfigDataLocation\VMData\metaconfig.mof"; 
+                        Destination = "Windows\System32\Configuration\metaconfig.mof"
                     }
                     @{
                         Source = "$ConfigDataLocation\VMData\SHMgmtSrv\*.mof";

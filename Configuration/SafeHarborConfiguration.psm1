@@ -164,11 +164,21 @@ Configuration DomainController
             }
         }
 
+        # Wait for the domain to be fully ready and discoverable. 
+        xWaitForADDomain WaitForADDomain 
+        {
+            DomainName       = $Node.DomainName
+            DomainUserCredential = (Import-Clixml $Node.DomainCredFile)
+            RetryCount       = $Node.RetryCount
+            RetryIntervalSec = $Node.RetryIntervalSec
+            DependsOn        = '[xDnsServerZoneTransfer]Setting'
+        }
+
         # Resource for xMachine synchronization
         Log "CompletionIndicator_$($Node.MachineName)"
         {
-            Message          = "Completed"
-            DependsOn        = "[xDnsServerZoneTransfer]Setting"
+            Message          = 'Completed'
+            DependsOn        = '[xWaitForADDomain]WaitForADDomain'
         }
     }
 }
